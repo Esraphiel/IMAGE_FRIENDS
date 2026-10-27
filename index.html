@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="IMAGE_FRIENDS — a tiny pixel place to find friends and chat.">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<title>IMAGE_FRIENDS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--panel:#151515;--yellow:#f5d547;--pink:#ff86c8;--white:#fff;--muted:#b8b8b8;--line:#454545;--green:#a9f7bd}
+*{box-sizing:border-box}body{margin:0;background:var(--black);color:var(--white);font-family:"Pixelify Sans",monospace;font-size:16px;min-height:100vh;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:8px 8px}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.wrap{max-width:1080px;margin:auto;padding:16px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;border:2px solid var(--yellow);background:var(--black);padding:12px;margin-bottom:16px;box-shadow:5px 5px 0 var(--pink)}.brand-lockup{display:flex;align-items:center;gap:10px;min-width:0}.site-logo{width:42px;height:42px;image-rendering:pixelated;flex-shrink:0}.brand{font-size:clamp(22px,5vw,34px);color:var(--yellow);font-weight:700;letter-spacing:1px}.brand span{color:var(--pink)}.sub{color:var(--muted);font-size:13px}.pixel{border:2px solid var(--white);background:var(--panel);color:var(--white);padding:10px 12px;box-shadow:3px 3px 0 #fff2;transition:transform .08s}.pixel:hover{transform:translate(-1px,-1px)}.primary{background:var(--yellow);color:var(--black);border-color:var(--yellow);font-weight:700}.pink{background:var(--pink);color:var(--black);border-color:var(--pink)}.danger{border-color:#ff7373;color:#ffaaaa}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.grow{flex:1;min-width:0}.grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px}.panel{border:2px solid var(--line);background:#101010;padding:14px;min-width:0}.panel h2,.panel h3{margin:0 0 12px;color:var(--yellow)}.nav{display:grid;gap:8px}.nav button{text-align:left;width:100%}.nav button.active{border-color:var(--pink);color:var(--pink)}label{display:block;color:var(--pink);margin:12px 0 5px}input,textarea{width:100%;background:#050505;color:var(--white);border:2px solid var(--line);padding:11px;outline:none;border-radius:0}input:focus,textarea:focus{border-color:var(--yellow)}textarea{resize:vertical;min-height:90px}.field{margin-bottom:8px}.small{font-size:13px;color:var(--muted);line-height:1.5}.hidden{display:none!important}.status{margin:12px 0;padding:10px;border:1px dashed var(--line);color:var(--muted);overflow-wrap:anywhere}.status.error{color:#ffaaaa;border-color:#ff7373}.status.ok{color:var(--green);border-color:var(--green)}.avatar{width:62px;height:62px;object-fit:cover;border:2px solid var(--pink);background:#222;image-rendering:pixelated}.avatar.big{width:92px;height:92px}.usercard{border:1px solid var(--line);padding:10px;display:flex;align-items:center;gap:10px;margin:8px 0}.usercard .meta{min-width:0;flex:1;overflow-wrap:anywhere}.username{color:var(--pink);font-weight:700}.bio{white-space:pre-wrap;overflow-wrap:anywhere;color:#ddd}.message-list{height:min(48vh,480px);overflow:auto;border:2px solid var(--line);padding:10px;background:#070707;margin:12px 0}.msg{max-width:88%;padding:9px 10px;margin:8px 0;border:1px solid var(--line);background:#151515;overflow-wrap:anywhere}.msg.mine{margin-left:auto;border-color:var(--yellow);background:#24200d}.msg .by{color:var(--pink);font-size:12px;margin-bottom:4px}.msg img{max-width:100%;max-height:260px;display:block;margin-top:8px;image-rendering:auto;border:1px solid var(--yellow)}.authbox{max-width:480px;margin:32px auto}.authbox .panel{padding:20px}.auth-tabs{display:flex;gap:8px;margin:14px 0}.auth-tabs button{flex:1}.section-title{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.foot{margin-top:22px;text-align:center;color:#777;font-size:12px}.lang{min-width:74px}.check{display:flex;align-items:center;gap:8px}.check input{width:auto}.separator{height:1px;background:var(--line);margin:16px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line)}.file-input{padding:7px}.top-right{display:flex;gap:8px;align-items:center}.toast{position:sticky;top:8px;z-index:3}
+@media(max-width:720px){.wrap{padding:10px}.grid{grid-template-columns:1fr}.nav{grid-template-columns:repeat(3,minmax(0,1fr))}.nav button{text-align:center;padding:9px 4px;font-size:14px}.top{align-items:flex-start}.sub{max-width:220px}.panel{padding:11px}.message-list{height:45vh}.hide-mobile{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="brand-lockup">
+    <img class="site-logo" src="./logo.svg" alt="" width="42" height="42">
+    <div><div class="brand">IMAGE<span>_</span>FRIENDS</div><div class="sub" id="tagline">PIXEL PEOPLE // CONNECT ONLINE</div></div>
+  </div>
+  <div class="top-right"><button id="langBtn" class="pixel lang" type="button">日本語</button><button id="headerLogout" class="pixel hidden" type="button">LOG OUT</button></div>
+</header>
+<div id="status" class="status toast hidden" role="status"></div>
+
+<section id="authView" class="authbox">
+ <div class="panel">
+  <h2 id="authTitle">WELCOME, FRIEND.</h2>
+  <p class="small" id="authDesc">Sign in or create an account to enter the pixel room.</p>
+  <div class="auth-tabs"><button id="showLogin" class="pixel primary" type="button">LOG IN</button><button id="showSignup" class="pixel" type="button">SIGN UP</button></div>
+  <form id="authForm">
+   <div id="nameField" class="field hidden"><label for="displayName" id="nameLabel">Display name</label><input id="displayName" maxlength="80" autocomplete="name"></div>
+   <div class="field"><label for="email" id="emailLabel">Email</label><input id="email" type="email" required autocomplete="email"></div>
+   <div class="field"><label for="password" id="passwordLabel">Password</label><input id="password" type="password" required minlength="8" autocomplete="current-password"></div>
+   <button id="authSubmit" class="pixel primary" type="submit" style="width:100%;margin-top:10px">LOG IN</button>
+  </form>
+  <div class="separator"></div>
+  <button id="googleBtn" class="pixel" type="button" style="width:100%">CONTINUE WITH GOOGLE</button>
+  <p class="small" id="googleNote">Google sign-in requires the Google OAuth provider and this website URL to be configured in Appwrite.</p>
+  <p class="small">Use a password you do not use on other sites. Never share your password.</p>
+ </div>
+</section>
+
+<section id="appView" class="grid hidden">
+ <aside class="panel">
+  <div class="row" style="margin-bottom:14px"><img id="sideAvatar" class="avatar" alt=""><div class="grow"><div id="sideUsername" class="username">NEW FRIEND</div><div id="sideEmail" class="small"></div></div></div>
+  <nav class="nav">
+   <button class="pixel active" data-page="profile" id="navProfile">PROFILE</button>
+   <button class="pixel" data-page="discover" id="navDiscover">FIND FRIENDS</button>
+   <button class="pixel" data-page="chats" id="navChats">MESSAGES</button>
+   <button class="pixel" data-page="settings" id="navSettings">SETTINGS</button>
+  </nav>
+  <div class="separator"></div>
+  <div class="small" id="privacyNote">Keep your password private. Only share images you have permission to share.</div>
+ </aside>
+ <main class="panel">
+  <section id="page-profile">
+   <div class="section-title"><h2 id="profileHeading">YOUR PROFILE</h2><span class="small" id="profileState">EDIT MODE</span></div>
+   <form id="profileForm">
+    <div class="row"><img id="profileAvatar" class="avatar big" alt="Profile picture"><div class="grow"><label for="avatarFile" id="avatarLabel">Profile image</label><input class="file-input" id="avatarFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><p class="small" id="avatarHelp">PNG, JPG, WEBP or GIF. Keep images small.</p></div></div>
+    <label for="username" id="usernameLabel">Username (unique)</label><input id="username" maxlength="24" minlength="3" pattern="[A-Za-z0-9_.-]{3,24}" required placeholder="pixel_friend">
+    <p class="small" id="usernameHelp">3–24 characters: letters, numbers, underscore, dot or dash.</p>
+    <label for="bio" id="bioLabel">Bio</label><textarea id="bio" maxlength="500" placeholder="A little about you..."></textarea>
+    <button class="pixel primary" id="saveProfile" type="submit">SAVE PROFILE</button>
+   </form>
+  </section>
+  <section id="page-discover" class="hidden">
+   <h2 id="discoverHeading">FIND FRIENDS</h2><label for="searchUsername" id="searchLabel">Search by username</label><div class="row"><input id="searchUsername" class="grow" maxlength="24" placeholder="username"><button id="searchBtn" class="pixel primary" type="button">SEARCH</button></div>
+   <div id="searchResults" style="margin-top:12px"><div class="empty" id="searchEmpty">Search for a username to find people.</div></div>
+   <div class="separator"></div><h3 id="publicProfileTitle">PROFILE PREVIEW</h3><div id="publicProfile" class="empty">Choose a friend to view their profile.</div>
+  </section>
+  <section id="page-chats" class="hidden">
+   <div class="section-title"><h2 id="chatsHeading">MESSAGES</h2><button id="refreshChats" class="pixel" type="button">REFRESH</button></div>
+   <p class="small" id="chatHint">Find a friend in the search tab and choose Message.</p>
+   <div id="chatList"></div>
+   <div id="chatPanel" class="hidden">
+    <div class="section-title"><h3 id="chatWith">CHAT</h3><button id="backChats" class="pixel" type="button">BACK</button></div>
+    <div id="messageList" class="message-list" aria-live="polite"></div>
+    <form id="messageForm">
+     <label for="messageText" id="messageLabel">Message</label><textarea id="messageText" maxlength="4000" rows="3" placeholder="Type something..."></textarea>
+     <label for="messageImage" id="messageImageLabel">Attach an image (optional)</label><input id="messageImage" class="file-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+     <button id="sendMessage" class="pixel primary" type="submit">SEND</button>
+    </form>
+   </div>
+  </section>
+  <section id="page-settings" class="hidden">
+   <h2 id="settingsHeading">SETTINGS</h2>
+   <p id="settingsText">Change the interface language or manage your session.</p>
+   <div class="row"><button id="settingsLang" class="pixel" type="button">SWITCH TO JAPANESE</button><button id="logoutBtn" class="pixel danger" type="button">LOG OUT</button></div>
+   <div class="separator"></div>
+   <h3 id="accountHeading">ACCOUNT</h3><p id="accountInfo" class="small"></p>
+   <p class="small" id="settingsPrivacy">Your profile and conversations are stored in the connected Appwrite project. Do not share private invite links or passwords.</p>
+  </section>
+ </main>
+</section>
+<div class="foot">IMAGE_FRIENDS // A SMALL PIXEL PLACE ON THE INTERNET</div>
+</div>
+
+<script type="module">
+import {Client, Account, TablesDB, Storage, ID, Query, Permission, Role} from "https://cdn.jsdelivr.net/npm/appwrite@17.0.0/+esm";
+
+/* Public project configuration only. Never put an Appwrite API key in browser code. */
+const CONFIG = {
+ endpoint: "https://nyc.cloud.appwrite.io/v1",
+ projectId: "6ae0acfe0012dfd623d0",
+ databaseId: "6ae0b0a10032fec4ba61",
+ profilesTableId: "6ae0b0d20019736a0c00",
+ conversationsTableId: "6ae0b38d0034f15957e5",
+ messagesTableId: "6ae0b4dc002340f61fd1",
+ bucketId: "6ae0b6a6002d0d0ce355"
+};
+const client = new Client().setEndpoint(CONFIG.endpoint).setProject(CONFIG.projectId);
+const account = new Account(client);
+const tables = new TablesDB(client);
+const storage = new Storage(client);
+const $ = id => document.getElementById(id);
+let user = null, profile = null, authMode = "login", lang = "en", currentChat = null, currentConversation = null, messageUnsub = null, chatRefreshTimer = null;
+const translations = {
+ en: {
+  tagline:"PIXEL PEOPLE // CONNECT ONLINE",login:"LOG IN",signup:"SIGN UP",welcome:"WELCOME, FRIEND.",authDesc:"Sign in or create an account to enter the pixel room.",displayName:"Display name",email:"Email",password:"Password",continueGoogle:"CONTINUE WITH GOOGLE",googleNote:"Google sign-in requires the Google OAuth provider and this website URL to be configured in Appwrite.",profile:"PROFILE",discover:"FIND FRIENDS",messages:"MESSAGES",settings:"SETTINGS",privacy:"Keep your password private. Only share images you have permission to share.",yourProfile:"YOUR PROFILE",editMode:"EDIT MODE",profileImage:"Profile image",imageHelp:"PNG, JPG, WEBP or GIF. Keep images small.",username:"Username (unique)",usernameHelp:"3–24 characters: letters, numbers, underscore, dot or dash.",bio:"Bio",saveProfile:"SAVE PROFILE",searchUsername:"Search by username",search:"SEARCH",searchEmpty:"Search for a username to find people.",preview:"PROFILE PREVIEW",chooseFriend:"Choose a friend to view their profile.",refresh:"REFRESH",chatHint:"Find a friend in the search tab and choose Message.",back:"BACK",message:"Message",attach:"Attach an image (optional)",send:"SEND",switchJa:"SWITCH TO JAPANESE",switchEn:"SWITCH TO ENGLISH",logout:"LOG OUT",account:"ACCOUNT",settingsText:"Change the interface language or manage your session.",settingsPrivacy:"Your profile and conversations are stored in the connected Appwrite project. Do not share passwords.",chat:"CHAT",messagePlaceholder:"Type something...",searchPlaceholder:"username",profileSaved:"Profile saved.",loginSuccess:"Signed in.",signupSuccess:"Account created. Now set up your profile.",needProfile:"Please create your profile first.",noResults:"No users found.",alreadyChat:"Message",startChat:"START CHAT",noChats:"No conversations yet. Find a friend to start one.",sent:"Message sent.",emptyMessage:"Write a message or attach an image.",googleUnavailable:"Google sign-in is not ready yet. Configure the Google provider in Appwrite first.",passwordShort:"Password must be at least 8 characters.",usernameInvalid:"Use 3–24 letters, numbers, dots, underscores or dashes.",usernameTaken:"That username is already taken.",genericError:"Something went wrong. Check Appwrite settings and permissions.",noMessages:"No messages yet. Say hello!",you:"YOU",profileRequired:"Set a username and save your profile before messaging.",uploading:"Uploading image…",fileTooBig:"Please use an image smaller than 5 MB.",notFound:"Profile not found."
+ },
+ ja: {
+  tagline:"ピクセルの仲間 // オンラインでつながろう",login:"ログイン",signup:"新規登録",welcome:"ようこそ、友だち。",authDesc:"ログインするか、アカウントを作成してください。",displayName:"表示名",email:"メールアドレス",password:"パスワード",continueGoogle:"Googleで続行",googleNote:"GoogleログインにはAppwriteでGoogle OAuthとこのサイトのURLを設定する必要があります。",profile:"プロフィール",discover:"友だちを探す",messages:"メッセージ",settings:"設定",privacy:"パスワードは秘密にしてください。共有してよい画像だけを送信してください。",yourProfile:"あなたのプロフィール",editMode:"編集モード",profileImage:"プロフィール画像",imageHelp:"PNG、JPG、WEBP、GIFに対応。画像サイズは小さめに。",username:"ユーザー名（重複不可）",usernameHelp:"英数字、_ . - を使った3〜24文字。",bio:"自己紹介",saveProfile:"保存",searchUsername:"ユーザー名で検索",search:"検索",searchEmpty:"ユーザー名を検索してください。",preview:"プロフィール",chooseFriend:"ユーザーを選ぶとプロフィールが表示されます。",refresh:"更新",chatHint:"友だちを検索して「メッセージ」を選んでください。",back:"戻る",message:"メッセージ",attach:"画像を添付（任意）",send:"送信",switchJa:"日本語に切り替え",switchEn:"英語に切り替え",logout:"ログアウト",account:"アカウント",settingsText:"言語を変更したり、ログアウトしたりできます。",settingsPrivacy:"プロフィールと会話はAppwriteに保存されます。パスワードを共有しないでください。",chat:"チャット",messagePlaceholder:"メッセージを入力…",searchPlaceholder:"ユーザー名",profileSaved:"プロフィールを保存しました。",loginSuccess:"ログインしました。",signupSuccess:"アカウントを作成しました。プロフィールを設定してください。",needProfile:"先にプロフィールを作成してください。",noResults:"ユーザーが見つかりません。",alreadyChat:"メッセージ",startChat:"チャットを開始",noChats:"会話はまだありません。友だちを探してください。",sent:"送信しました。",emptyMessage:"メッセージか画像を入力してください。",googleUnavailable:"Googleログインはまだ準備できていません。Appwriteで設定してください。",passwordShort:"パスワードは8文字以上にしてください。",usernameInvalid:"ユーザー名は3〜24文字の英数字、_ . - のみ使用できます。",usernameTaken:"このユーザー名はすでに使用されています。",genericError:"エラーが発生しました。Appwriteの設定と権限を確認してください。",noMessages:"メッセージはありません。最初の挨拶を送りましょう！",you:"あなた",profileRequired:"メッセージを送る前にユーザー名を設定してください。",uploading:"画像をアップロード中…",fileTooBig:"5MB未満の画像を使用してください。",notFound:"プロフィールが見つかりません。"
+ }
+};
+function t(key){return translations[lang][key] || translations.en[key] || key}
+function showStatus(message, type=""){const el=$("status");el.textContent=message;el.className="status toast"+(type?" "+type:"");el.classList.remove("hidden")}
+function clearStatus(){$("status").classList.add("hidden")}
+function friendlyError(e){
+ const msg=String(e?.message||"");
+ if(/username_unique|unique/i.test(msg)||e?.code===409)return t("usernameTaken");
+ if(/row|permission|authorized|role|scope/i.test(msg))return msg+" — check Appwrite table/row permissions and column IDs.";
+ return msg || t("genericError");
+}
+function setBusy(button,busy,label){button.disabled=busy;if(busy)button.dataset.oldText=button.textContent;button.textContent=busy?(label||"…"):(button.dataset.oldText||button.textContent)}
+function avatarUrl(fileId){return fileId?storage.getFilePreview({bucketId:CONFIG.bucketId,fileId,width:180,height:180,gravity:"center",quality:80}).toString():""}
+function fallbackAvatar(){return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90"><rect width="90" height="90" fill="#151515"/><rect x="12" y="12" width="66" height="66" fill="#f5d547"/><rect x="24" y="24" width="12" height="12" fill="#0a0a0a"/><rect x="54" y="24" width="12" height="12" fill="#0a0a0a"/><rect x="24" y="54" width="42" height="6" fill="#ff86c8"/></svg>`)}
+function setAvatar(img,fileId){img.src=fileId?avatarUrl(fileId):fallbackAvatar();img.onerror=()=>{img.src=fallbackAvatar()}}
+function rowPermissions(userId){return [Permission.read(Role.user(userId)),Permission.update(Role.user(userId)),Permission.delete(Role.user(userId))]}
+async function currentUser(){try{user=await account.get();return user}catch{user=null;return null}}
+async function getMyProfile(){
+ if(!user)return null;
+ try{const res=await tables.listRows({databaseId:CONFIG.databaseId,tableId:CONFIG.profilesTableId,queries:[Query.equal("userId",user.$id),Query.limit(1)]});return res.rows?.[0]||null}catch(e){console.error(e);return null}
+}
+function applyLanguage(){
+ document.documentElement.lang=lang==="ja"?"ja":"en";
+ const map={tagline:"tagline",authTitle:"welcome",authDesc:"authDesc",showLogin:"login",showSignup:"signup",nameLabel:"displayName",emailLabel:"email",passwordLabel:"password",googleBtn:"continueGoogle",googleNote:"googleNote",navProfile:"profile",navDiscover:"discover",navChats:"messages",navSettings:"settings",privacyNote:"privacy",profileHeading:"yourProfile",profileState:"editMode",avatarLabel:"profileImage",avatarHelp:"imageHelp",usernameLabel:"username",usernameHelp:"usernameHelp",bioLabel:"bio",saveProfile:"saveProfile",discoverHeading:"discover",searchLabel:"searchUsername",searchBtn:"search",searchEmpty:"searchEmpty",publicProfileTitle:"preview",chatsHeading:"messages",refreshChats:"refresh",chatHint:"chatHint",backChats:"back",messageLabel:"message",messageImageLabel:"attach",sendMessage:"send",settingsHeading:"settings",settingsText:"settingsText",settingsLang:lang==="en"?"switchJa":"switchEn",logoutBtn:"logout",headerLogout:"logout",accountHeading:"account"};
+ for(const [id,key] of Object.entries(map)){const el=$(id);if(el)el.textContent=t(key)}
+ $("langBtn").textContent=lang==="en"?"日本語":"EN";
+ $("username").placeholder=lang==="en"?"pixel_friend":"pixel_friend";
+ $("bio").placeholder=lang==="en"?"A little about you...":"あなたについて…";
+ $("searchUsername").placeholder=t("searchPlaceholder");$("messageText").placeholder=t("messagePlaceholder");
+ $("authSubmit").textContent=t(authMode==="login"?"login":"signup");
+ $("showLogin").classList.toggle("primary",authMode==="login");$("showSignup").classList.toggle("primary",authMode==="signup");
+}
+function showApp(){
+ $("authView").classList.add("hidden");$("appView").classList.remove("hidden");$("headerLogout").classList.remove("hidden");
+ $("sideEmail").textContent=user?.email||"";$("accountInfo").textContent=(user?.email||"")+" · "+(user?.$id||"");
+ setAvatar($("sideAvatar"),profile?.avatarFileId);setAvatar($("profileAvatar"),profile?.avatarFileId);
+ $("sideUsername").textContent=profile?.username||user?.name||"NEW FRIEND";
+ $("username").value=profile?.username||"";$("bio").value=profile?.bio||"";
+}
+function showAuth(){ $("appView").classList.add("hidden");$("authView").classList.remove("hidden");$("headerLogout").classList.add("hidden"); }
+function goPage(page){
+ ["profile","discover","chats","settings"].forEach(p=>$("page-"+p).classList.toggle("hidden",p!==page));
+ document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ if(page==="chats")loadChats();
+}
+async function uploadImage(file){
+ if(!file)return null;
+ if(!/^image\/(png|jpeg|webp|gif)$/.test(file.type))throw new Error("Choose a PNG, JPG, WEBP or GIF image.");
+ if(file.size>5*1024*1024)throw new Error(t("fileTooBig"));
+ const result=await storage.createFile({bucketId:CONFIG.bucketId,fileId:ID.unique(),file,permissions:[Permission.read(Role.users())]});
+ return result.$id;
+}
+async function saveProfile(event){
+ event.preventDefault();if(!user)return;
+ const username=$("username").value.trim().replace(/^@/,"");
+ if(!/^[A-Za-z0-9_.-]{3,24}$/.test(username)){showStatus(t("usernameInvalid"),"error");return}
+ const btn=$("saveProfile");setBusy(btn,true);
+ try{
+  let avatarFileId=profile?.avatarFileId||"";
+  const file=$("avatarFile").files?.[0];if(file)avatarFileId=await uploadImage(file);
+  const data={userId:user.$id,username,bio:$("bio").value.trim().slice(0,500),avatarFileId,createdAt:profile?.createdAt||new Date().toISOString()};
+  if(profile)profile=await tables.updateRow({databaseId:CONFIG.databaseId,tableId:CONFIG.profilesTableId,rowId:profile.$id,data,permissions:[Permission.read(Role.users()),Permission.update(Role.user(user.$id)),Permission.delete(Role.user(user.$id))]});
+  else profile=await tables.createRow({databaseId:CONFIG.databaseId,tableId:CONFIG.profilesTableId,rowId:user.$id,data,permissions:[Permission.read(Role.users()),Permission.update(Role.user(user.$id)),Permission.delete(Role.user(user.$id))]});
+  showApp();showStatus(t("profileSaved"),"ok");
+ }catch(e){showStatus(friendlyError(e),"error");console.error(e)}finally{setBusy(btn,false)}
+}
+async function authSubmit(event){
+ event.preventDefault();clearStatus();
+ const email=$("email").value.trim(),password=$("password").value;
+ const btn=$("authSubmit");setBusy(btn,true);
+ try{
+  if(authMode==="signup"){
+   if(password.length<8)throw new Error(t("passwordShort"));
+   await account.create({userId:ID.unique(),email,password,name:$("displayName").value.trim()||email.split("@")[0]});
+   await account.createEmailPasswordSession({email,password});
+   await currentUser();profile=await getMyProfile();showApp();goPage("profile");showStatus(t("signupSuccess"),"ok");
+  }else{
+   await account.createEmailPasswordSession({email,password});await currentUser();profile=await getMyProfile();showApp();showStatus(t("loginSuccess"),"ok");goPage(profile?"profile":"profile");
+  }
+ }catch(e){showStatus(friendlyError(e),"error");console.error(e)}finally{setBusy(btn,false)}
+}
+async function logout(){try{if(user)await account.deleteSession({sessionId:"current"})}catch(e){console.warn(e)}user=null;profile=null;currentChat=null;currentConversation=null;if(messageUnsub){messageUnsub();messageUnsub=null}showAuth();clearStatus()}
+async function searchUsers(){
+ const q=$("searchUsername").value.trim().replace(/^@/,"");const out=$("searchResults");
+ if(!q){out.innerHTML=`<div class="empty">${escapeHtml(t("searchEmpty"))}</div>`;return}
+ try{
+  const res=await tables.listRows({databaseId:CONFIG.databaseId,tableId:CONFIG.profilesTableId,queries:[Query.equal("username",q),Query.limit(10)]});
+  out.replaceChildren();
+  const rows=res.rows||[];
+  if(!rows.length){out.innerHTML=`<div class="empty">${escapeHtml(t("noResults"))}</div>`;return}
+  rows.filter(r=>r.userId!==user.$id).forEach(r=>out.appendChild(makeUserCard(r,true)));
+  if(!out.children.length)out.innerHTML=`<div class="empty">${escapeHtml(t("noResults"))}</div>`;
+ }catch(e){showStatus(friendlyError(e),"error");console.error(e)}
+}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function makeUserCard(p,withMessage){
+ const card=document.createElement("div");card.className="usercard";
+ const img=document.createElement("img");img.className="avatar";img.alt="";setAvatar(img,p.avatarFileId);
+ const meta=document.createElement("div");meta.className="meta";const name=document.createElement("div");name.className="username";name.textContent="@"+p.username;const bio=document.createElement("div");bio.className="bio small";bio.textContent=p.bio||"";
+ meta.append(name,bio);card.append(img,meta);
+ if(withMessage){const b=document.createElement("button");b.className="pixel pink";b.textContent=t("alreadyChat");b.onclick=()=>openConversation(p);card.append(b)}
+ return card;
+}
+async function showPublicProfile(p){
+ const box=$("publicProfile");box.replaceChildren();
+ const card=document.createElement("div");card.className="usercard";card.style.alignItems="flex-start";
+ const img=document.createElement("img");img.className="avatar big";setAvatar(img,p.avatarFileId);
+ const meta=document.createElement("div");meta.className="meta";const name=document.createElement("h3");name.className="username";name.textContent="@"+p.username;const bio=document.createElement("p");bio.className="bio";bio.textContent=p.bio||"";meta.append(name,bio);card.append(img,meta);
+ if(p.userId!==user.$id){const b=document.createElement("button");b.className="pixel pink";b.textContent=t("startChat");b.onclick=()=>openConversation(p);meta.append(b)}
+ box.append(card);
+}
+async function openConversation(otherProfile){
+ if(!profile?.username){showStatus(t("profileRequired"),"error");goPage("profile");return}
+ try{
+  const ids=[user.$id,otherProfile.userId].sort();
+  let found=await tables.listRows({databaseId:CONFIG.databaseId,tableId:CONFIG.conversationsTableId,queries:[Query.equal("memberA",ids[0]),Query.equal("memberB",ids[1]),Query.limit(1)]});
+  currentConversation=found.rows?.[0]||null;
+  if(!currentConversation){
+   const permissions=[Permission.read(Role.user(ids[0])),Permission.read(Role.user(ids[1])),Permission.update(Role.user(ids[0])),Permission.update(Role.user(ids[1]))];
+   currentConversation=await tables.createRow({databaseId:CONFIG.databaseId,tableId:CONFIG.conversationsTableId,rowId:ID.unique(),data:{memberA:ids[0],memberB:ids[1],updatedAt:new Date().toISOString()},permissions});
+  }
+  currentChat=otherProfile;goPage("chats");$("chatList").classList.add("hidden");$("chatPanel").classList.remove("hidden");$("chatWith").textContent="@"+otherProfile.username;
+  loadMessages();
+ }catch(e){showStatus(friendlyError(e),"error");console.error(e)}
+}
+function stopMessageRefresh(){if(messageUnsub){messageUnsub();messageUnsub=null}if(chatRefreshTimer){clearInterval(chatRefreshTimer);chatRefreshTimer=null}}
+async function loadMessages(){
+ if(!currentConversation||!currentChat)return;
+ stopMessageRefresh();
+ await refreshMessages();
+ chatRefreshTimer=setInterval(refreshMessages,5000);
+}
+async function refreshMessages(){
+ if(!currentConversation||!currentChat)return;
+ try{
+  const res=await tables.listRows({databaseId:CONFIG.databaseId,tableId:CONFIG.messagesTableId,queries:[Query.equal("conversationId",currentConversation.$id),Query.orderAsc("createdAt"),Query.limit(100)]});
+  const list=$("messageList");list.replaceChildren();
+  const rows=res.rows||[];
+  if(!rows.length){list.innerHTML=`<div class="empty">${escapeHtml(t("noMessages"))}</div>`;return}
+  for(const m of rows){
+   const el=document.createElement("div");el.className="msg"+(m.senderId===user.$id?" mine":"");
+   const by=document.createElement("div");by.className="by";by.textContent=m.senderId===user.$id?t("you"):(currentChat.username||"FRIEND");
+   const body=document.createElement("div");body.textContent=m.text||"";
+   el.append(by,body);
+   if(m.imageFileId){const img=document.createElement("img");img.alt="Attached image";img.src=storage.getFileView({bucketId:CONFIG.bucketId,fileId:m.imageFileId}).toString();img.onerror=()=>{img.alt="Image unavailable"};el.append(img)}
+   list.append(el);
+  }
+  list.scrollTop=list.scrollHeight;
+ }catch(e){console.error(e);showStatus(friendlyError(e),"error")}
+}
+async function sendMessage(event){
+ event.preventDefault();if(!currentConversation||!currentChat)return;
+ const text=$("messageText").value.trim(),file=$("messageImage").files?.[0];
+ if(!text&&!file){showStatus(t("emptyMessage"),"error");return}
+ const btn=$("sendMessage");setBusy(btn,true);
+ try{
+  let imageFileId="";if(file){showStatus(t("uploading"));imageFileId=await uploadImage(file)}
+  const ids=[user.$id,currentChat.userId];
+  await tables.createRow({databaseId:CONFIG.databaseId,tableId:CONFIG.messagesTableId,rowId:ID.unique(),data:{conversationId:currentConversation.$id,senderId:user.$id,text,imageFileId,createdAt:new Date().toISOString()},permissions:[Permission.read(Role.user(ids[0])),Permission.read(Role.user(ids[1]))]});
+  $("messageText").value="";$("messageImage").value="";showStatus(t("sent"),"ok");await refreshMessages();
+ }catch(e){showStatus(friendlyError(e),"error");console.error(e)}finally{setBusy(btn,false)}
+}
+async function loadChats(){
+ $("chatList").classList.remove("hidden");$("chatPanel").classList.add("hidden");
+ if(!user)return;
+ try{
+  const [a,b]=await Promise.all([
+   tables.listRows({databaseId:CONFIG.databaseId,tableId:CONFIG.conversationsTableId,queries:[Query.equal("memberA",user.$id),Query.limit(100)]}),
+   tables.listRows({databaseId:CONFIG.databaseId,tableId:CONFIG.conversationsTableId,queries:[Query.equal("memberB",user.$id),Query.limit(100)]})
+  ]);
+  const rows=[...(a.rows||[]),...(b.rows||[])].filter((v,i,arr)=>arr.findIndex(x=>x.$id===v.$id)===i).sort((x,y)=>String(y.updatedAt).localeCompare(String(x.updatedAt)));
+  const list=$("chatList");list.replaceChildren();
+  if(!rows.length){list.innerHTML=`<div class="empty">${escapeHtml(t("noChats"))}</div>`;return}
+  for(const conv of rows){
+   const otherId=conv.memberA===user.$id?conv.memberB:conv.memberA;
+   try{const res=await tables.listRows({databaseId:CONFIG.databaseId,tableId:CONFIG.profilesTableId,queries:[Query.equal("userId",otherId),Query.limit(1)]});if(res.rows?.[0]){const p=res.rows[0];const card=makeUserCard(p,true);card.querySelector("button").textContent=t("alreadyChat");list.append(card)}}catch(e){console.warn(e)}
+  }
+ }catch(e){showStatus(friendlyError(e),"error");console.error(e)}
+}
+function setupEvents(){
+ $("showLogin").onclick=()=>{authMode="login";$("nameField").classList.add("hidden");$("password").autocomplete="current-password";applyLanguage()};
+ $("showSignup").onclick=()=>{authMode="signup";$("nameField").classList.remove("hidden");$("password").autocomplete="new-password";applyLanguage()};
+ $("authForm").addEventListener("submit",authSubmit);
+ $("profileForm").addEventListener("submit",saveProfile);
+ $("searchBtn").onclick=searchUsers;$("searchUsername").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchUsers()}});
+ $("messageForm").addEventListener("submit",sendMessage);
+ $("langBtn").onclick=()=>{lang=lang==="en"?"ja":"en";applyLanguage();if(user)showApp()};
+ $("settingsLang").onclick=()=>{lang=lang==="en"?"ja":"en";applyLanguage();if(user)showApp()};
+ $("logoutBtn").onclick=logout;$("headerLogout").onclick=logout;
+ $("googleBtn").onclick=async()=>{
+  try {
+    const here = window.location.href.split("#")[0];
+    await account.createOAuth2Session({provider:"google", success:here, failure:here});
+  } catch(e) { showStatus(friendlyError(e), "error"); console.error(e); }
+};
+ $("refreshChats").onclick=loadChats;
+ $("backChats").onclick=()=>{stopMessageRefresh();currentChat=null;currentConversation=null;loadChats()};
+ document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>goPage(b.dataset.page));
+}
+setupEvents();applyLanguage();
+try{
+ await currentUser();
+ if(user){profile=await getMyProfile();showApp();goPage("profile")}
+ else showAuth();
+}catch(e){showAuth();showStatus(t("genericError"),"error")}
+</script>
+</body>
+</html>
